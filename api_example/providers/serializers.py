@@ -8,12 +8,16 @@ class LanguageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Language
         fields = ['code', 'name']
+        read_only_fields = ['code', 'name']
+        http_method_names = ['get']
 
 
 class CurrencySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Currency
         fields = ['symbol']
+        read_only_fields = ['symbol']
+        http_method_names = ['get']
 
 
 class ProviderSerializer(serializers.HyperlinkedModelSerializer):
