@@ -4,3 +4,4 @@ djangorestframework==3.10.2
 phonenumbers==8.10.17
 pytz==2019.2
 Babel==2.7.0
+Shapely==1.6.4.post2

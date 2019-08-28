@@ -4,11 +4,14 @@ API Example URL routing
 from django.urls import include, path
 from rest_framework import routers
 from providers import views
+from providers.views import ProviderViewSet, LanguageViewSet, CurrencyViewSet
+from areas.views import AreaViewSet
 
 router = routers.DefaultRouter()
-router.register(r'providers', views.ProviderViewSet)
-router.register(r'languages', views.LanguageViewSet)
-router.register(r'currencies', views.CurrencyViewSet)
+router.register(r'providers', ProviderViewSet)
+router.register(r'languages', LanguageViewSet)
+router.register(r'currencies', CurrencyViewSet)
+router.register(r'areas', AreaViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
