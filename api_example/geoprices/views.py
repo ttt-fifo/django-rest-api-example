@@ -15,12 +15,15 @@ class GeopriceViewSet(viewsets.ViewSet):
         lat = float(lat)
         lon = float(lon)
 
+        host = request.get_host()
+        scheme = request.scheme
+
         point = Point(lat, lon)
         queryset = Area.objects.all()
         result = []
         for area in queryset:
             polygon = geoloads(area.polygon)
             if polygon.contains(point):
-                result.append(dict(area=f'/areas/{area.id}'))
+                result.append(dict(area=f'{scheme}://{host}/areas/{area.id}'))
 
         return Response(result)

@@ -7,20 +7,20 @@ from providers.models import Currency
 class LanguageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Language
-        fields = ['code', 'name']
-        read_only_fields = ['code', 'name']
+        fields = ['id', 'code', 'name']
+        read_only_fields = ['id', 'code', 'name']
         http_method_names = ['get']
 
 
 class CurrencySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Currency
-        fields = ['symbol']
-        read_only_fields = ['symbol']
+        fields = ['id', 'symbol']
+        read_only_fields = ['id', 'symbol']
         http_method_names = ['get']
 
 
 class ProviderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Provider
-        fields = ['name', 'email', 'phonenumber', 'language', 'currency']
+        fields = ['id', 'name', 'email', 'phonenumber', 'language', 'currency']

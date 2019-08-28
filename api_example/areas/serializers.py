@@ -5,4 +5,5 @@ from areas.models import Area
 class AreaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Area
-        fields = ['name', 'provider', 'price', 'polygon']
+        fields = ['id', 'name', 'provider', 'price', 'polygon']
+        read_only_fields = ['id']
