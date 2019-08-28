@@ -1,9 +1,8 @@
 from django.db import models
 from providers.models import Provider
-import json
 from django.core.exceptions import ValidationError
-# from shapely.wkt import loads as geoloads
-# from shapely.wkt import dumps as geodumps
+from shapely.geometry import Polygon
+from shapely.wkt import loads as geoloads
 
 
 class PolygonField(models.CharField):
@@ -13,24 +12,14 @@ class PolygonField(models.CharField):
     def get_db_prep_value(self, value, *args, **kwargs):
         if value is None:
             return None
-        return json.dumps(value)
 
-    def to_python(self, value):
-        if value is None:
-            return value
         try:
-            return json.loads(value)
+            polygon = geoloads(value)
+            if not isinstance(polygon, Polygon):
+                raise ValidationError("Incorrect Polygon Data")
+            return value
         except Exception as e:
-            raise ValidationError(str(e))
-
-    def from_db_value(self, value, expression, connection, context):
-        return self.to_python(value)
-
-    def formfield(self, **kwargs):
-        from django.forms import FloatField
-        defaults = {'form_class': FloatField}
-        defaults.update(kwargs)
-        return super(PolygonField, self).formfield(**defaults)
+            raise ValidationError(f"Incorrect Polygon Data: {e}")
 
 
 class Area(models.Model):
@@ -41,4 +30,4 @@ class Area(models.Model):
     polygon = PolygonField(max_length=500, blank=False)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'[{self.id}] {self.name}'
