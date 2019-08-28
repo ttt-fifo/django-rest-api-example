@@ -17,6 +17,8 @@ class PolygonField(models.CharField):
             polygon = geoloads(value)
             if not isinstance(polygon, Polygon):
                 raise ValidationError("Incorrect Polygon Data")
+            elif not polygon.is_valid:
+                raise ValidationError("Incorrect Polygon Data")
             return value
         except Exception as e:
             raise ValidationError(f"Incorrect Polygon Data: {e}")
