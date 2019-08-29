@@ -6,6 +6,13 @@ from shapely.wkt import loads as geoloads
 
 
 class PolygonField(models.CharField):
+    """
+    Custom model field for polygons
+    - uses shapely to write polygon
+    - running on top of non-geospatial db
+    - does not have geological projection
+    - this is just example, not usable for live projects
+    """
 
     description = "Polygon Area Field"
 
@@ -14,11 +21,16 @@ class PolygonField(models.CharField):
             return None
 
         try:
+            # load string in shapely
             polygon = geoloads(value)
+
+            # validate polygon
             if not isinstance(polygon, Polygon):
                 raise ValidationError("Incorrect Polygon Data")
             elif not polygon.is_valid:
                 raise ValidationError("Incorrect Polygon Data")
+
+            # save string in db (non-geospatial db)
             return value
         except Exception as e:
             raise ValidationError(f"Incorrect Polygon Data: {e}")

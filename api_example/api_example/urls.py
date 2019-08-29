@@ -1,5 +1,5 @@
 """
-API Example URL routing
+URL routing
 """
 from django.urls import include, path
 from rest_framework import routers
@@ -7,6 +7,7 @@ from providers.views import ProviderViewSet, LanguageViewSet, CurrencyViewSet
 from areas.views import AreaViewSet
 from geoprices.views import GeopriceViewSet
 
+# rest api router, routing viewsets only
 router = routers.DefaultRouter()
 router.register(r'providers', ProviderViewSet)
 router.register(r'languages', LanguageViewSet)

@@ -1,21 +1,22 @@
-Django REST API Example
+Django REST API Example Skeleton
 
-Goals:
+Build API endpoints:
 
-   - demonstrate creation of REST API with Django REST Framework
+    1) Providers with data:
+        - Name
+        - Email
+        - Phone Number
+        - Language
+        - Currency
 
-Assignment:
+    2) Service areas of business operation for the providers:
+        - name of the area
+        - related provider
+        - price in this area (to compare with the other prices)
+        - polygon of the area
 
-    Build API endpoints to create, update, delete and retrieve information about providers:
+    3) Prices query endpoint:
+        - by given latitude, longitude
+        - return all polygons, containing this point
 
-       - Name
-       - Email
-       - Phone Number
-       - Language
-       - Currency
-
-    Each provider should have area of business operation. The provider should be able to define its service area. Build API endpoint to create, update, delete and get a polygon. A polygon should contain a name and price as well as the geojson information.
-
-    Create API endpoint to query provider areas. It should take a lat/lng pair as arguments and return a list of all polygons that include the given lat/lng. The name of the polygon, provider's name, and price should be returned for each polygon. This operation should be fast.
-
-    Deploy the code to a Docker hosting provider.
+Deploy the code to Docker.

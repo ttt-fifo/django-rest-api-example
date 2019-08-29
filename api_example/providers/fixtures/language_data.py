@@ -4,6 +4,13 @@ Creates language data fixture from LANG django variable
 """
 from django.conf.locale import LANG_INFO
 import json
+import os
+
+# cwd to the current script directory
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
 
 
 def language_data():
